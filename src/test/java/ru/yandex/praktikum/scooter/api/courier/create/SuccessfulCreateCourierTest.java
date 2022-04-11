@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.courier.create;
+package ru.yandex.praktikum.scooter.api.courier.create;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -6,9 +6,9 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.praktikum.scooter.api.CourierClient;
-import ru.yandex.praktikum.scooter.api.Courier;
-import ru.yandex.praktikum.scooter.api.CourierCredentials;
+import ru.yandex.praktikum.scooter.api.courier.CourierClient;
+import ru.yandex.praktikum.scooter.api.courier.Courier;
+import ru.yandex.praktikum.scooter.api.courier.CourierCredentials;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;

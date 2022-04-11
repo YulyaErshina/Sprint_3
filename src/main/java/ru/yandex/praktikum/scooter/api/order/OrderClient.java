@@ -1,6 +1,7 @@
-package ru.yandex.praktikum.scooter.api;
+package ru.yandex.praktikum.scooter.api.order;
 
 import io.restassured.response.ValidatableResponse;
+import ru.yandex.praktikum.scooter.api.ScooterRestClient;
 
 import static io.restassured.RestAssured.given;
 

@@ -1,7 +1,8 @@
-package ru.yandex.praktikum.scooter.api;
+package ru.yandex.praktikum.scooter.api.courier;
 
 import static io.restassured.RestAssured.given;
 import io.restassured.response.ValidatableResponse;
+import ru.yandex.praktikum.scooter.api.ScooterRestClient;
 
 public class CourierClient extends ScooterRestClient {
 

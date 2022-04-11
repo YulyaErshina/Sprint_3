@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.courier.create;
+package ru.yandex.praktikum.scooter.api.courier.create;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.yandex.praktikum.scooter.api.Courier;
-import ru.yandex.praktikum.scooter.api.CourierClient;
+import ru.yandex.praktikum.scooter.api.courier.Courier;
+import ru.yandex.praktikum.scooter.api.courier.CourierClient;
 
 import static org.junit.Assert.assertEquals;
 

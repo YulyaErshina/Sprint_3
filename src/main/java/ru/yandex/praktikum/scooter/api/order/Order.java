@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.scooter.api;
+package ru.yandex.praktikum.scooter.api.order;
 
 import com.github.javafaker.Faker;
 
