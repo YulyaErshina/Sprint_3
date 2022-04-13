@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.scooter.api.order;
 
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.yandex.praktikum.scooter.api.ScooterRestClient;
 
@@ -9,7 +10,8 @@ public class OrderClient extends ScooterRestClient {
 
     public final String ORDER_PATH = "/api/v1/orders";
 
-    public ValidatableResponse createNewOrder(Order order){
+    @Step("Создание нового заказа")
+    public ValidatableResponse createNewOrder(Order order) {
         return given()
                 .spec(getBaseSpec())
                 .body(order)
@@ -18,6 +20,7 @@ public class OrderClient extends ScooterRestClient {
                 .then();
     }
 
+    @Step("Отмена заказа")
     public void cancel(int track) {
         given()
                 .spec(getBaseSpec())
@@ -27,7 +30,8 @@ public class OrderClient extends ScooterRestClient {
                 .then();
     }
 
-    public ValidatableResponse getListOrders(){
+    @Step("Получение списка заказов")
+    public ValidatableResponse getListOrders() {
         return given()
                 .spec(getBaseSpec())
                 .when()

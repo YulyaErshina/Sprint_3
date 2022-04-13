@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -23,14 +23,14 @@ public class CreateOrderTest {
     private final List<ColorOrder> color;
     private int track;
 
-    public CreateOrderTest(List<ColorOrder> color, int expStatusCode){
+    public CreateOrderTest(List<ColorOrder> color, int expStatusCode) {
         this.color = color;
         this.expStatusCode = expStatusCode;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1}")
     public static Object[][] getColorData() {
-        return new Object[][] {
+        return new Object[][]{
                 {List.of(ColorOrder.BLACK), 201},
                 {List.of(ColorOrder.GREY), 201},
                 {null, 201},
@@ -51,13 +51,11 @@ public class CreateOrderTest {
 
     @Test
     @DisplayName("Create an order when the user fills in or doesn't fill in the color field")
-    public void createOrderWithOrWithoutFillColor(){
+    public void createOrderWithOrWithoutFillColor() {
 
         ValidatableResponse response = orderClient.createNewOrder(order);
-
         int statusCode = response.extract().statusCode();
         track = response.extract().path("track");
-
         assertEquals("Некорректный код статуса", expStatusCode, statusCode);
         assertThat("Некорректный ID трека", track, notNullValue());
 

@@ -6,15 +6,13 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.yandex.praktikum.scooter.api.courier.CourierClient;
 import ru.yandex.praktikum.scooter.api.courier.Courier;
+import ru.yandex.praktikum.scooter.api.courier.CourierClient;
 import ru.yandex.praktikum.scooter.api.courier.CourierCredentials;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class LoginCourierWithoutRequiredFieldsTest {
@@ -37,9 +35,9 @@ public class LoginCourierWithoutRequiredFieldsTest {
         this.expErrorMessage = expErrorMessage;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2}")
     public static Object[][] getLoginCourierData() {
-        return new Object[][] {
+        return new Object[][]{
                 {CourierCredentials.getWithLoginOnly(COURIER), 400, "Недостаточно данных для входа"},
                 {CourierCredentials.getWithPasswordOnly(COURIER), 400, "Недостаточно данных для входа"},
                 {CourierCredentials.getWithFakeLoginAndPassword(), 404, "Учетная запись не найдена"},
@@ -48,7 +46,7 @@ public class LoginCourierWithoutRequiredFieldsTest {
 
     @Test
     @DisplayName("Login courier without login or password")
-    public void loginCourierWithoutRequiredFieldsTest(){
+    public void loginCourierWithoutRequiredFieldsTest() {
 
         COURIER_CLIENT.create(COURIER);
         ValidatableResponse response = COURIER_CLIENT.login(CourierCredentials.from(COURIER));
@@ -56,9 +54,8 @@ public class LoginCourierWithoutRequiredFieldsTest {
         ValidatableResponse errorResponse = new CourierClient().login(courierCredentials);
         int statusCode = errorResponse.extract().statusCode();
         assertThat("Некорректный код статуса", statusCode, equalTo(expStatusCode));
-
         String errorMessage = errorResponse.extract().path("message");
-        assertEquals ("Некорректное сообщение об ошибке", expErrorMessage, errorMessage);
+        assertEquals("Некорректное сообщение об ошибке", expErrorMessage, errorMessage);
 
         //в проверке с авторизацией только с логином баг - отваливается по таймауту:
 //            //Expected :400

@@ -31,7 +31,6 @@ public class GetListOrderTest {
         ValidatableResponse response = orderClient.getListOrders();
         int statusCode = response.extract().statusCode();
         List<Map<String, Object>> orders = response.extract().jsonPath().getList("orders");
-
         assertEquals("Некорректный код статуса", 200, statusCode);
         assertThat("Список заказов пуст", orders, hasSize(30));
         assertThat("Некорректный ID заказа", orders.get(randomID).get("id"), notNullValue());

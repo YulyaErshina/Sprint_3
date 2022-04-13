@@ -12,7 +12,6 @@ import ru.yandex.praktikum.scooter.api.courier.CourierClient;
 
 import static org.junit.Assert.assertEquals;
 
-
 @RunWith(Parameterized.class)
 public class CreateCourierWithoutRequiredFieldsTest {
 
@@ -21,16 +20,15 @@ public class CreateCourierWithoutRequiredFieldsTest {
     private final int expStatusCode;
     private final String expErrorMessage;
 
-
     public CreateCourierWithoutRequiredFieldsTest(Courier courier, int expStatusCode, String expErrorMessage) {
         this.courier = courier;
         this.expStatusCode = expStatusCode;
         this.expErrorMessage = expErrorMessage;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2}")
     public static Object[][] getCourierData() {
-        return new Object[][] {
+        return new Object[][]{
                 {Courier.getWithLoginOnly(), 400, "Недостаточно данных для создания учетной записи"},
                 {Courier.getWithPasswordOnly(), 400, "Недостаточно данных для создания учетной записи"},
                 {Courier.getCourierWithFirstNameOnly(), 400, "Недостаточно данных для создания учетной записи"}
@@ -45,12 +43,11 @@ public class CreateCourierWithoutRequiredFieldsTest {
     @Test
     @DisplayName("Creation of a courier without login and password")
     @Description("The user can't create a new courier if the login field or the password field is not filled")
-    public void createCourierWithoutRequiredFields(){
+    public void createCourierWithoutRequiredFields() {
 
         ValidatableResponse response = courierClient.create(courier);
         int statusCode = response.extract().statusCode();
         String errorMessage = response.extract().path("message");
-
         assertEquals("Некорректный код статуса", expStatusCode, statusCode);
         assertEquals("Некорректное сообщение об ошибке", expErrorMessage, errorMessage);
     }

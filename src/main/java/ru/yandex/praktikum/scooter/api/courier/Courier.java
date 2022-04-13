@@ -8,14 +8,33 @@ public class Courier {
     public String password;
     public String firstName;
 
-    public Courier(String login, String password, String firstName){
+    public Courier(String login, String password, String firstName) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
     }
 
-    public Courier(){
+    public Courier() {
 
+    }
+
+    public static Courier getRandomCourier() {
+        String login = RandomStringUtils.randomAlphabetic(5);
+        String password = RandomStringUtils.randomAlphabetic(4);
+        String firstName = RandomStringUtils.randomAlphabetic(5);
+        return new Courier(login, password, firstName);
+    }
+
+    public static Courier getWithLoginOnly() {
+        return new Courier().setLogin(RandomStringUtils.randomAlphabetic(5));
+    }
+
+    public static Courier getWithPasswordOnly() {
+        return new Courier().setPassword(RandomStringUtils.randomAlphabetic(4));
+    }
+
+    public static Courier getCourierWithFirstNameOnly() {
+        return new Courier().setFirstName(RandomStringUtils.randomAlphabetic(5));
     }
 
     public String getLogin() {
@@ -45,30 +64,10 @@ public class Courier {
         return this;
     }
 
-    public static Courier getRandomCourier() {
-        String login = RandomStringUtils.randomAlphabetic(5);
-        String password = RandomStringUtils.randomAlphabetic(4);
-        String firstName = RandomStringUtils.randomAlphabetic(5);
-        return new Courier(login, password, firstName);
-    }
-
-    public static Courier getWithLoginOnly() {
-        return new Courier().setLogin(RandomStringUtils.randomAlphabetic(5));
-    }
-
-    public static Courier getWithPasswordOnly() {
-        return new Courier().setPassword(RandomStringUtils.randomAlphabetic(4));
-    }
-
-    public static Courier getCourierWithFirstNameOnly(){
-        return new Courier().setFirstName(RandomStringUtils.randomAlphabetic(5));
-    }
-
     @Override
     public String toString() {
-        return "Courier {login:"+login+",password:"+password+",firstName:"+firstName+"}";
+        return "Courier {login:" + login + ",password:" + password + ",firstName:" + firstName + "}";
     }
-
 
 
 }

@@ -6,8 +6,8 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.praktikum.scooter.api.courier.CourierClient;
 import ru.yandex.praktikum.scooter.api.courier.Courier;
+import ru.yandex.praktikum.scooter.api.courier.CourierClient;
 import ru.yandex.praktikum.scooter.api.courier.CourierCredentials;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -31,20 +31,15 @@ public class SuccessfulCreateCourierTest {
         courierClient.delete(courierId);
     }
 
-
     @Test
     @DisplayName("The user can create a new courier")
     @Description("The user can create a new courier if he fills in all the required fields")
-    public void successfulCourierCreation(){
+    public void successfulCourierCreation() {
 
         ValidatableResponse response = courierClient.create(courier);
-
         int statusCode = response.extract().statusCode();
-
         boolean isCourierCreated = response.extract().path("ok");
-
         courierId = courierClient.login(new CourierCredentials(courier.login, courier.password)).extract().path("id");
-
         assertThat("Некорректный код статуса", statusCode, equalTo(201));
         assertTrue("Курьер не создан", isCourierCreated);
         assertThat("Неверный ID курьера", courierId, is(not(0)));
